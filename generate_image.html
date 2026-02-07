@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>توليد صورة باسمك</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f9f9f9; }
+  input { padding: 10px; font-size: 16px; width: 250px; margin-right: 10px; }
+  button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  img { margin-top: 20px; max-width: 90%; border: 1px solid #ccc; border-radius: 8px; }
+  a { display: inline-block; margin-top: 10px; font-size: 16px; text-decoration: none; color: white; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; }
+  a:hover { background-color: #45a049; }
+</style>
+</head>
+<body>
+
+<h2>ضع اسمك على الصورة</h2>
+<input type="text" id="username" placeholder="أدخل اسمك هنا">
+<button onclick="generateImage()">عرض الصورة</button>
+
+<div id="result"></div>
+
+<script>
+function generateImage() {
+    const name = encodeURIComponent(document.getElementById('username').value.trim());
+    if (!name) { alert('الرجاء إدخال اسمك'); return; }
+
+    // رابط Cloudinary مع النص الديناميكي
+    const imageUrl = `https://res.cloudinary.com/dmycnw3j2/image/upload/co_rgb:000000,l_text:Arial_59_normal_left:${name}/fl_layer_apply,fl_no_overflow,g_center,x_10,y_102/Manar_lpce0q.jpg`;
+
+    // عرض الصورة ورابط التحميل
+    document.getElementById('result').innerHTML = `
+        <img src="${imageUrl}" alt="صورة باسمك"><br>
+        <a href="${imageUrl}" download="صورة_${name}.jpg">اضغط هنا لتحميل الصورة</a>
+    `;
+}
+</script>
+
+</body>
+</html>
